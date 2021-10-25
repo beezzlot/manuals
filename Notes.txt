@@ -1,0 +1,27 @@
+ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР!
+ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР!
+ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР!
+
+1. Web-сервер — NGINX (скопировать шаблон)
+2. IP на if — netplan*
+* — 
+	network:
+	version: 2 
+	renderer: networkd 
+	ethernets: 
+		ens33: 
+			dhcp4: false 
+			addresses: [192.168.233.154/24] 
+			gateway4: 192.168.233.2 
+			nameservers:
+			addresses: [1.1.1.1, 8.8.8.8]
+3. Firewall OFF:
+FIREWALL НА СЕРВЕРАХ ОТКЛЮЧИТЬ! FIREWALL НА СЕРВЕРАХ ОТКЛЮЧИТЬ!
+
+	— systemctl disable --now firewalld
+	— sudo ufw disable
+4. Docker:
+ДЛЯ ЗАПУСКА ПОСЛЕ ПЕРЕЗАГРУЗКИ ДОБАВИТЬ АРГУМЕНТ --restart
+
+	— INSTALL: apt install docker docker.io
+	— USER: usermod -aG [пользователь] docker
