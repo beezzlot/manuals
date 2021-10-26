@@ -28,6 +28,9 @@
 потом ставь командой - apt install network-manager -y
 и ставь адрес просто через nmtui
 
+
+FFFFFFFFFFFFF
+все у вас ок c OPNSENSE!!! Зайдите по http://192.168.1.1 а не по https АААААААААААА, НУ ВЧЕРА ЖЕ СМОТРЕЛИ!!!
 Макар - https://losst.ru/nastrojka-seti-netplan-v-ubuntu
 
 3. Firewall OFF:
