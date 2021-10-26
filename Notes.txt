@@ -2,37 +2,29 @@
 ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР!
 ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР! ВКЛЮЧИ ПРОВАЙДЕР!
 
-1. Web-сервер — NGINX (скопировать шаблон)
-2. IP на if — netplan*
-* — 
-	network:
-	version: 2 
-	renderer: networkd 
-	ethernets: 
-		ens33: 
-			dhcp4: false 
-			addresses: [192.168.233.154/24] 
-			gateway4: 192.168.233.2 
-			nameservers:
-			addresses: [1.1.1.1, 8.8.8.8]
-аааа, команда netplan apply!!!!!! 
-Она применит настройки вашего файла. 
-И новый файл делать не надо, у вас там по-умолчанию есть файл 00-netconfig что-то там, просто поправьте значения там!!!!!
-""""""""""""""""""""""""
-Макар, попробуй вот так: 
-	ip addr add 10.0.0.2/30  dev ens160 - поставишь айпи так
-	ip route add default via 10.0.0.1 - поставишь гейтвей
-потом в /etc/resolv.conf - напиши
-	nameserver 8.8.8.8
-проверь пинги до ya.ru
-потом ставь командой - apt install network-manager -y
-и ставь адрес просто через nmtui
+1. Web-сервер — NGINX (шаблон /etc/nginx/...)
+2.1 Постоянный IP на if — /etc/netplan/[файл по умолчанию]:
+ВВЕДИ ПОСЛЕ СОХРАНЕНИЯ ФАЙЛА КОМАНДУ sudo netplan apply
 
+network:
+  version: 2 
+  renderer: networkd 
+  ethernets: 
+    ens33: 
+    dhcp4: off 
+    addresses: [192.168.233.154/24] 
+    gateway4: 192.168.233.2 
+    nameservers:
+      addresses: [1.1.1.1, 8.8.8.8]
+2.2. Временный IP на if:
+НУЖЕН, ЧТОБЫ ПОСТАВИТЬ ПОСТОЯННЫЙ АДРЕС С nmtui
+(apt install network-manager -y)
 
-FFFFFFFFFFFFF
-все у вас ок c OPNSENSE!!! Зайдите по http://192.168.1.1 а не по https АААААААААААА, НУ ВЧЕРА ЖЕ СМОТРЕЛИ!!!
-Макар - https://losst.ru/nastrojka-seti-netplan-v-ubuntu
-
+	— ip addr add [ip-адрес/маска] dev [ethernet-интерфейс]
+	— ip route add default via [шлюз по умолчанию]
+	— nano /etc/resolv.conf
+	— nameserver 8.8.8.8
+	— ping ya.ru
 3. Firewall OFF:
 FIREWALL НА СЕРВЕРАХ ОТКЛЮЧИТЬ! FIREWALL НА СЕРВЕРАХ ОТКЛЮЧИТЬ!
 
