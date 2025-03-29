@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Data Over 45 Years</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .stats {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mining Data Over 45 Years (1980-2024)</h1>
+    
+    <h2>All Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Year</th>
+                <th>Rock Type</th>
+                <th>Amount (tonnes)</th>
+                <th>Location</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in mining_data %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ "%.2f"|format(record[3]) }}</td>
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="stats">
+        <h2>Yearly Statistics by Rock Type</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Rock Type</th>
+                    <th>Total Amount (tonnes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in stats %}
+                <tr>
+                    <td>{{ stat[0] }}</td>
+                    <td>{{ stat[1] }}</td>
+                    <td>{{ "%.2f"|format(stat[2]) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
